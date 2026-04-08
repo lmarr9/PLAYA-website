@@ -128,7 +128,6 @@
         .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px;}
         .logo svg { width: 24px; height: 24px; fill: var(--primary); }
         .nav-links { display: none; gap: 32px; font-weight: 500; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--text-main); }
         @media (min-width: 768px) { .nav-links { display: flex; } }
 
         /* --- HERO SECTION --- */
@@ -212,7 +211,8 @@
             padding: 10px 24px; border-radius: 50px; border: none; background: transparent;
             font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all 0.2s;
         }
-        .toggle-btn.active { background: white; color: var(--text-main); box-shadow: var(--shadow-sm); }
+        .toggle-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+        .nav-links a:hover { color: var(--primary); }
 
         .steps-grid {
             display: grid; grid-template-columns: 1fr; gap: 32px;
@@ -348,8 +348,8 @@
                 <a href="#for-coaches">For Coaches</a>
             </nav>
             <div style="display: flex; gap: 12px;">
-                <button class="btn btn-outline" style="display: none;">Log in</button>
-                <button class="btn btn-primary">Get the App</button>
+                <button class="btn btn-outline">Log in</button>
+                <button class="btn btn-primary">Download Free</button>
             </div>
         </div>
     </header>
@@ -359,7 +359,8 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Train with college athletes. Level up your game.</h1>
-                <p>The marketplace connecting ambitious players with verified D1, D2, and D3 athletes for personalized, in-person coaching sessions.</p>
+                <p>Connect with verified D1, D2, and D3 college athletes for personalized, in-person training sessions — right in your neighborhood.</p>
+                <p style="font-size: 0.875rem; color: #a7f3d0; margin-bottom: 0; margin-top: -16px;">Trusted by 500+ athletes across the country</p>
                 
                 <div class="app-buttons">
                     <button class="btn-app">
@@ -400,7 +401,7 @@
                             </div>
                         </div>
                         <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div style="font-weight:bold; color:var(--primary);">$$$ / hr</div>
+                            <div style="font-weight:bold; color:var(--primary);">$45 / hr</div>
                             <div style="background:var(--primary); color:white; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Book</div>
                         </div>
                     </div>
@@ -428,7 +429,7 @@
         <div class="container">
             <div class="text-center">
                 <h2>How Playa works</h2>
-                <p>Designed for athletes, by athletes. See results on the field.</p>
+                <p>Built by athletes, for athletes. Three steps to get on the field.</p>
                 
                 <div class="toggle-container">
                     <div class="toggle-bg">
@@ -530,9 +531,9 @@
         <div class="container">
             <div class="split-section reversed">
                 <div class="split-text">
-                    <span class="kicker">For Student Athletes</span>
+                    <span class="kicker">For Players</span>
                     <h2>Train like they do at the next level.</h2>
-                    <p>Stop guessing how to improve. Learn the exact drills, mindset, and techniques that got your coach a college roster spot.</p>
+                    <p>Stop guessing how to improve. Learn the exact drills, mindset, and techniques that earned your coach a college roster spot.</p>
                     <ul style="margin-top:24px; display:flex; flex-direction:column; gap:16px;">
                         <li style="display:flex; gap:12px;">
                             <span style="color:var(--primary); font-weight:bold;">✓</span>
@@ -540,10 +541,10 @@
                         </li>
                         <li style="display:flex; gap:12px;">
                             <span style="color:var(--primary); font-weight:bold;">✓</span>
-                            <span><strong>College recruiting advice:</strong> Ask questions about the recruitment process from someone who just went through it.</span>
+                            <span><strong>Recruiting insights:</strong> Get advice on the recruitment process from someone who recently lived it.</span>
                         </li>
                     </ul>
-                    <button class="btn btn-primary" style="margin-top:32px;">Find a Coach Near You</button>
+                    <button class="btn btn-primary" style="margin-top:32px;">Browse Coaches Near You</button>
                 </div>
                 <div class="split-visual" style="background-color: #f0fdf4;">
                     <!-- Abstract representation of finding a coach -->
@@ -577,9 +578,9 @@
                 <div class="split-text">
                     <span class="kicker">For College Athletes</span>
                     <h2>Monetize your skills. Build your brand.</h2>
-                    <p>NIL changed the game. Playa gives you the platform to leverage your athletic status, earn money on your own schedule, and give back to the local community.</p>
-                    <p>No club fees, no complex marketing. Just set your profile and let local players find you.</p>
-                    <button class="btn btn-outline" style="margin-top:24px;">Apply to Coach</button>
+                    <p>NIL changed the game. Playa gives you the platform to leverage your athletic status, earn on your own schedule, and give back to your local community.</p>
+                    <p>No club fees, no marketing headaches. Set up your profile and let players come to you.</p>
+                    <button class="btn btn-outline" style="margin-top:24px;">Start Coaching</button>
                 </div>
                 <div class="split-visual" style="background-color: transparent; border:none; box-shadow:none;">
                     <!-- Abstract representation of earnings dashboard -->
@@ -606,7 +607,7 @@
     <section class="section-padding bg-gray">
         <div class="container">
             <div class="text-center">
-                <h2>Loved by athletes</h2>
+                <h2>What athletes are saying</h2>
             </div>
             
             <div class="testimonials-grid">
@@ -683,7 +684,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="margin:0; color:#a7f3d0;">© 2024 Playa Technologies Inc. All rights reserved.</p>
+                <p style="margin:0; color:#a7f3d0;">© 2025 Playa Technologies Inc. All rights reserved.</p>
                 <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
                     <a href="#">IG</a>
                     <a href="#">TW</a>
