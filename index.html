@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playa | Connect with College Athletes for Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #059669; /* Emerald Green */
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-main);
+            background-color: var(--bg-white);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 1rem; }
+        
+        .kicker {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        .btn-outline:hover { background-color: var(--bg-light); }
+
+        .btn-app {
+            background-color: #111;
+            color: white;
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+        .btn-app:hover { background-color: #000; border-color: #555; }
+        .btn-app .icon { font-size: 1.5rem; }
+        .btn-app span { display: block; font-size: 0.75rem; font-weight: 400; color: #ccc;}
+        .btn-app strong { display: block; font-size: 1.1rem; font-weight: 600; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px;}
+        .logo svg { width: 24px; height: 24px; fill: var(--primary); }
+        .nav-links { display: none; gap: 32px; font-weight: 500; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--text-main); }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            padding: 160px 0 100px;
+            background: linear-gradient(180deg, var(--primary) 0%, #036b4a 100%);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        /* GRRO-style curved background illusion */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 150px;
+            background-color: var(--bg-white);
+            border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+            transform: scaleX(1.5);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 { margin-bottom: 24px; color: white;}
+        .hero p { color: #e5e7eb; font-size: 1.25rem; margin-bottom: 40px; }
+        
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        /* Phone Mockup Placeholder */
+        .hero-mockup {
+            position: relative;
+            z-index: 10;
+            width: 320px;
+            height: 650px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 40px;
+            border: 8px solid #111;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 25px; background: #111;
+            border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+        }
+        .mockup-ui {
+            flex: 1; padding: 40px 20px 20px; background: var(--bg-light);
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .mockup-header { display: flex; justify-content: space-between; align-items: center; }
+        .mockup-avatar { width: 40px; height: 40px; background: var(--primary-light); border-radius: 50%; }
+        .mockup-card { background: white; padding: 16px; border-radius: 16px; box-shadow: var(--shadow-sm); }
+        .mockup-card-title { height: 16px; width: 60%; background: #e5e7eb; border-radius: 4px; margin-bottom: 8px;}
+        .mockup-card-subtitle { height: 12px; width: 40%; background: #f3f4f6; border-radius: 4px;}
+
+        /* --- HOW IT WORKS --- */
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        
+        .toggle-container {
+            display: flex; justify-content: center; margin: 40px 0;
+        }
+        .toggle-bg {
+            background: var(--bg-light); border-radius: 50px; padding: 4px; display: inline-flex;
+            border: 1px solid var(--border-color);
+        }
+        .toggle-btn {
+            padding: 10px 24px; border-radius: 50px; border: none; background: transparent;
+            font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all 0.2s;
+        }
+        .toggle-btn.active { background: white; color: var(--text-main); box-shadow: var(--shadow-sm); }
+
+        .steps-grid {
+            display: grid; grid-template-columns: 1fr; gap: 32px;
+            display: none; /* Controlled by JS */
+        }
+        .steps-grid.active { display: grid; }
+        @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .step-card {
+            background: white; border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 32px;
+            box-shadow: var(--shadow-sm); transition: transform 0.2s;
+        }
+        .step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .step-label { font-size: 0.875rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; display: block; }
+        .step-icon {
+            width: 48px; height: 48px; border-radius: 12px; background: var(--primary-light);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+            color: var(--primary); font-size: 24px; font-weight: bold;
+        }
+
+        /* --- FEATURES (GRRO Perk Style) --- */
+        .bg-gray { background-color: var(--bg-light); }
+        .features-grid {
+            display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 60px;
+        }
+        @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .feature-box {
+            background: white; border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 32px 24px;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
+        }
+        .feature-graphic {
+            height: 100px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+        }
+        /* CSS shapes for graphics */
+        .graphic-shield { width: 50px; height: 60px; background: var(--primary-light); border-radius: 0 0 25px 25px; position: relative;}
+        .graphic-shield::before { content:'✓'; position:absolute; color:var(--primary); top:15px; left:18px; font-weight:bold; font-size: 20px;}
+        .graphic-chat { width: 60px; height: 40px; background: #e0f2fe; border-radius: 12px; position: relative;}
+        .graphic-chat::after {content:''; position:absolute; bottom:-8px; left:10px; border-width: 8px 8px 0; border-style: solid; border-color: #e0f2fe transparent transparent transparent; }
+        .graphic-calendar { width: 50px; height: 50px; border: 2px solid #e5e7eb; border-radius: 8px; position: relative;}
+        .graphic-calendar::before {content:''; position:absolute; top: 0; left:0; right:0; height:12px; background:var(--primary); border-radius: 6px 6px 0 0;}
+
+        /* --- SPLIT SECTIONS (For Coaches / Players) --- */
+        .split-section {
+            display: grid; grid-template-columns: 1fr; align-items: center; gap: 60px;
+        }
+        @media (min-width: 1024px) {
+            .split-section { grid-template-columns: 1fr 1fr; }
+        }
+        .split-section.reversed .split-text { order: 2; }
+        .split-section.reversed .split-visual { order: 1; }
+        @media (max-width: 1023px) {
+            .split-section.reversed .split-text { order: 1; }
+            .split-section.reversed .split-visual { order: 2; }
+        }
+
+        .split-visual {
+            background: var(--bg-light); border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg); padding: 40px;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: var(--shadow-sm); min-height: 400px; position: relative;
+        }
+        
+        /* GRRO style floating UI element */
+        .floating-ui {
+            background: white; border-radius: 16px; padding: 24px;
+            box-shadow: var(--shadow-lg); width: 80%;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Custom section colors */
+        .bg-primary { background-color: var(--primary); color: white; }
+        .bg-primary h2, .bg-primary p { color: white; }
+        .bg-primary .kicker { color: var(--primary-light); }
+        .bg-primary .btn-outline { color: white; border-color: rgba(255,255,255,0.3); }
+        .bg-primary .btn-outline:hover { background-color: rgba(255,255,255,0.1); }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials-grid {
+            display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 60px;
+        }
+        @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+        .review-card {
+            background: white; padding: 32px; border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        .stars { color: #fbbf24; margin-bottom: 16px; letter-spacing: 2px;}
+        .review-text { font-style: italic; color: var(--text-main); margin-bottom: 24px; }
+        .reviewer { display: flex; align-items: center; gap: 12px; }
+        .reviewer-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e5e7eb; }
+        .reviewer-info h4 { font-size: 1rem; margin: 0; }
+        .reviewer-info p { font-size: 0.875rem; margin: 0; color: var(--text-muted); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #064e3b; /* Very dark green */
+            color: #d1fae5;
+            padding: 80px 0 40px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+        .footer-brand h2 { color: white; font-size: 1.5rem; margin-bottom: 16px; }
+        .footer-col h4 { color: white; font-weight: 600; margin-bottom: 20px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.875rem; flex-wrap: wrap; gap: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <!-- Simple Play Icon -->
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                Playa
+            </a>
+            <nav class="nav-links">
+                <a href="#how-it-works">How it works</a>
+                <a href="#features">Features</a>
+                <a href="#for-coaches">For Coaches</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-outline" style="display: none;">Log in</button>
+                <button class="btn btn-primary">Get the App</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Train with college athletes. Level up your game.</h1>
+                <p>The marketplace connecting ambitious players with verified D1, D2, and D3 athletes for personalized, in-person coaching sessions.</p>
+                
+                <div class="app-buttons">
+                    <button class="btn-app">
+                        <span class="icon"></span>
+                        <div>
+                            <span>Download on the</span>
+                            <strong>App Store</strong>
+                        </div>
+                    </button>
+                    <button class="btn-app">
+                        <span class="icon">▶</span>
+                        <div>
+                            <span>GET IT ON</span>
+                            <strong>Google Play</strong>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Phone Mockup inside Hero -->
+            <div class="hero-mockup">
+                <div class="notch"></div>
+                <div class="mockup-ui">
+                    <div class="mockup-header">
+                        <div>
+                            <div style="font-weight:bold; font-size:18px; color:#111;">Find a Coach</div>
+                            <div style="font-size:12px; color:#666;">Soccer • Los Angeles</div>
+                        </div>
+                        <div class="mockup-avatar"></div>
+                    </div>
+                    <!-- Fake Coach Cards -->
+                    <div class="mockup-card">
+                        <div style="display:flex; gap:12px; margin-bottom:12px;">
+                            <div style="width:48px; height:48px; border-radius:8px; background:#d1fae5;"></div>
+                            <div style="flex:1;">
+                                <div style="font-weight:600; color:#111;">Marcus Johnson</div>
+                                <div style="font-size:12px; color:#666;">D1 Midfielder • UCLA</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div style="font-weight:bold; color:var(--primary);">$$$ / hr</div>
+                            <div style="background:var(--primary); color:white; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Book</div>
+                        </div>
+                    </div>
+                    <div class="mockup-card">
+                         <div style="display:flex; gap:12px; margin-bottom:12px;">
+                            <div style="width:48px; height:48px; border-radius:8px; background:#e0e7ff;"></div>
+                            <div style="flex:1;">
+                                <div style="font-weight:600; color:#111;">Sarah Davis</div>
+                                <div style="font-size:12px; color:#666;">D1 Goalkeeper • USC</div>
+                            </div>
+                        </div>
+                        <div class="mockup-card-title"></div>
+                    </div>
+                     <div class="mockup-card" style="opacity: 0.5;">
+                        <div class="mockup-card-title" style="width:80%"></div>
+                        <div class="mockup-card-subtitle" style="margin-top:8px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how-it-works" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2>How Playa works</h2>
+                <p>Designed for athletes, by athletes. See results on the field.</p>
+                
+                <div class="toggle-container">
+                    <div class="toggle-bg">
+                        <button class="toggle-btn active" onclick="switchTab('players')">For Players</button>
+                        <button class="toggle-btn" onclick="switchTab('coaches')">For Coaches</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Steps -->
+            <div id="steps-players" class="steps-grid active">
+                <div class="step-card">
+                    <span class="step-label">STEP 01</span>
+                    <div class="step-icon">🔍</div>
+                    <h3>Find your ideal coach</h3>
+                    <p>Filter by sport, location, position, and college division to find the perfect verified college athlete to train with.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-label">STEP 02</span>
+                    <div class="step-icon">📅</div>
+                    <h3>Book a session</h3>
+                    <p>View real-time availability and book in-person training sessions directly through the app instantly.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-label">STEP 03</span>
+                    <div class="step-icon">📈</div>
+                    <h3>Level up your game</h3>
+                    <p>Meet at the field, execute a personalized training plan, and get direct feedback from someone playing at the next level.</p>
+                </div>
+            </div>
+
+            <!-- Coach Steps -->
+            <div id="steps-coaches" class="steps-grid">
+                <div class="step-card">
+                    <span class="step-label">STEP 01</span>
+                    <div class="step-icon">✅</div>
+                    <h3>Get Verified</h3>
+                    <p>Create your profile and verify your active college athlete status to build trust within the Playa community.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-label">STEP 02</span>
+                    <div class="step-icon">⚙️</div>
+                    <h3>Set your schedule</h3>
+                    <p>You're the boss. Set your own hourly rates, choose the locations you train at, and open slots around your class schedule.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-label">STEP 03</span>
+                    <div class="step-icon">💸</div>
+                    <h3>Train & Earn</h3>
+                    <p>Accept bookings, conduct sessions, and get paid securely through the app while giving back to the next generation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (GRRO Perks style) -->
+    <section id="features" class="section-padding bg-gray">
+        <div class="container">
+            <div class="text-center" style="max-width: 600px; margin: 0 auto;">
+                <h2>Everything you need to grow</h2>
+                <p>Built for the modern athlete ecosystem. We handle the logistics so you can focus on the sport.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-graphic">
+                        <div class="graphic-shield"></div>
+                    </div>
+                    <h3>Verified Roster</h3>
+                    <p style="font-size:0.9rem; margin-bottom:0;">Every coach on Playa is manually verified as an active or recent college athlete.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-graphic">
+                        <div class="graphic-chat"></div>
+                    </div>
+                    <h3>In-App Messaging</h3>
+                    <p style="font-size:0.9rem; margin-bottom:0;">Coordinate meetups, discuss goals, and stay connected safely within the app.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-graphic">
+                        <div class="graphic-calendar"></div>
+                    </div>
+                    <h3>Smart Scheduling</h3>
+                    <p style="font-size:0.9rem; margin-bottom:0;">Sync with your personal calendar to prevent double-booking and manage time easily.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-graphic">
+                        <div style="font-size: 40px; color:var(--primary); font-weight:bold;">$</div>
+                    </div>
+                    <h3>Secure Payments</h3>
+                    <p style="font-size:0.9rem; margin-bottom:0;">Cashless, frictionless payments. Coaches get paid fast, players book with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Players Split Section -->
+    <section id="for-players" class="section-padding">
+        <div class="container">
+            <div class="split-section reversed">
+                <div class="split-text">
+                    <span class="kicker">For Student Athletes</span>
+                    <h2>Train like they do at the next level.</h2>
+                    <p>Stop guessing how to improve. Learn the exact drills, mindset, and techniques that got your coach a college roster spot.</p>
+                    <ul style="margin-top:24px; display:flex; flex-direction:column; gap:16px;">
+                        <li style="display:flex; gap:12px;">
+                            <span style="color:var(--primary); font-weight:bold;">✓</span>
+                            <span><strong>Position-specific training:</strong> Find a coach who plays exactly where you want to play.</span>
+                        </li>
+                        <li style="display:flex; gap:12px;">
+                            <span style="color:var(--primary); font-weight:bold;">✓</span>
+                            <span><strong>College recruiting advice:</strong> Ask questions about the recruitment process from someone who just went through it.</span>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary" style="margin-top:32px;">Find a Coach Near You</button>
+                </div>
+                <div class="split-visual" style="background-color: #f0fdf4;">
+                    <!-- Abstract representation of finding a coach -->
+                    <div class="floating-ui">
+                        <div style="font-size:14px; font-weight:bold; margin-bottom:16px; border-bottom:1px solid #eee; padding-bottom:8px;">Search Results</div>
+                        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+                            <div style="width:50px; height:50px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">#10</div>
+                            <div>
+                                <div style="font-weight:600;">Alex R.</div>
+                                <div style="font-size:12px; color:#666;">Attacking Mid • D1</div>
+                            </div>
+                            <div style="margin-left:auto; font-weight:bold;">98% Match</div>
+                        </div>
+                         <div style="display:flex; align-items:center; gap:16px; opacity:0.5;">
+                            <div style="width:50px; height:50px; border-radius:50%; background:#ccc;"></div>
+                            <div>
+                                <div style="height:14px; width:80px; background:#ccc; margin-bottom:4px; border-radius:4px;"></div>
+                                <div style="height:10px; width:100px; background:#eee; border-radius:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Coaches Split Section (Solid Background) -->
+    <section id="for-coaches" class="section-padding bg-primary">
+        <div class="container">
+            <div class="split-section">
+                <div class="split-text">
+                    <span class="kicker">For College Athletes</span>
+                    <h2>Monetize your skills. Build your brand.</h2>
+                    <p>NIL changed the game. Playa gives you the platform to leverage your athletic status, earn money on your own schedule, and give back to the local community.</p>
+                    <p>No club fees, no complex marketing. Just set your profile and let local players find you.</p>
+                    <button class="btn btn-outline" style="margin-top:24px;">Apply to Coach</button>
+                </div>
+                <div class="split-visual" style="background-color: transparent; border:none; box-shadow:none;">
+                    <!-- Abstract representation of earnings dashboard -->
+                    <div class="floating-ui" style="background:#047857; border:1px solid rgba(255,255,255,0.2); color:white;">
+                        <div style="font-size:14px; color:#a7f3d0; margin-bottom:8px;">This Month's Earnings</div>
+                        <div style="font-size:36px; font-weight:bold; margin-bottom:24px;">$1,240.00</div>
+                        
+                        <div style="font-size:12px; color:#a7f3d0; margin-bottom:8px;">Upcoming Sessions</div>
+                        <div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:8px; display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <span>Tomorrow, 4:00 PM</span>
+                            <span style="font-weight:bold;">$60</span>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:8px; display:flex; justify-content:space-between;">
+                            <span>Saturday, 10:00 AM</span>
+                            <span style="font-weight:bold;">$120</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding bg-gray">
+        <div class="container">
+            <div class="text-center">
+                <h2>Loved by athletes</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I couldn't figure out my shooting mechanics. One hour with a D1 striker on Playa and he fixed an issue my club coaches missed for years."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar"></div>
+                        <div class="reviewer-info">
+                            <h4>Jake T.</h4>
+                            <p>High School Junior</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"As a college athlete, my schedule is crazy. Playa lets me open up 2-3 hours on weekends to make extra cash doing what I already love."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar"></div>
+                        <div class="reviewer-info">
+                            <h4>Mia S.</h4>
+                            <p>D2 Point Guard & Coach</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The app is super clean. Finding a coach and paying through Apple Pay took 2 minutes. My son loves his new mentor."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar"></div>
+                        <div class="reviewer-info">
+                            <h4>David W.</h4>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>Playa</h2>
+                    <p style="color: #a7f3d0; max-width: 300px;">The premier marketplace connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Find a Coach</a></li>
+                        <li><a href="#">Become a Coach</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Safety & Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">NIL Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="margin:0; color:#a7f3d0;">© 2024 Playa Technologies Inc. All rights reserved.</p>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple JavaScript for Tab Switching -->
+    <script>
+        function switchTab(tabName) {
+            // Update buttons
+            const buttons = document.querySelectorAll('.toggle-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update grids
+            const grids = document.querySelectorAll('.steps-grid');
+            grids.forEach(grid => grid.classList.remove('active'));
+            document.getElementById('steps-' + tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
