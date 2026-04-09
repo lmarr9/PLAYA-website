@@ -193,7 +193,7 @@
             flex-wrap: wrap;
         }
         .stat-pill {
-            background: rgba(255,255,255,0.12);
+            background: var(--primary);
             border: 1px solid rgba(255,255,255,0.18);
             color: white;
             padding: 6px 16px;
@@ -513,6 +513,7 @@
                 <a href="#how-it-works">How it works</a>
                 <a href="#features">Features</a>
                 <a href="#for-coaches">For Coaches</a>
+                <a href="#coach-fee">0% Coach Fee</a>
             </nav>
             <div style="display: flex; gap: 12px;">
                 <button class="btn btn-outline btn-login">Log in</button>
@@ -834,6 +835,65 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 0% Coach Fee -->
+    <section id="coach-fee" class="section-padding" style="background: #f9fafb;">
+        <div class="container">
+            <div class="text-center" style="max-width: 680px; margin: 0 auto;">
+                <span class="kicker">0% Platform Fee</span>
+                <h2>Coaches keep every dollar they earn.</h2>
+                <p style="font-size: 1.125rem; margin-top: 16px;">Most platforms take 20–30% off the top of every session you book. Playa takes nothing. Zero. Set your rate, show up, and get paid the full amount — every time.</p>
+            </div>
+
+            <!-- Centrepiece stat -->
+            <div style="text-align: center; margin: 56px 0;">
+                <div style="font-size: clamp(5rem, 14vw, 9rem); font-weight: 800; line-height: 1; color: #059669; letter-spacing: -0.04em;">0%</div>
+                <div style="font-size: 0.875rem; font-weight: 600; color: #6b7280; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px;">Platform fee. Always.</div>
+            </div>
+
+            <!-- Comparison table -->
+            <div style="max-width: 680px; margin: 0 auto 56px; border-radius: 16px; overflow: hidden; border: 1px solid #e5e7eb; box-shadow: 0 4px 16px rgba(0,0,0,0.05);">
+                <!-- Table header -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: white;">
+                    <div style="padding: 16px 20px; font-size: 0.75rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid #e5e7eb;"></div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 700; color: #059669; text-align: center; border-bottom: 1px solid #e5e7eb; border-left: 1px solid #e5e7eb; background: #f0fdf4;">Playa</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 700; color: #6b7280; text-align: center; border-bottom: 1px solid #e5e7eb; border-left: 1px solid #e5e7eb;">Other Platforms</div>
+                </div>
+                <!-- Rows -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: white;">
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #374151; border-bottom: 1px solid #f3f4f6;">Platform Fee</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #059669; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb; background: #f0fdf4;">✓ 0%</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; color: #9ca3af; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb;">✗ 20–30%</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: #fafafa;">
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #374151; border-bottom: 1px solid #f3f4f6;">Payout Speed</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #059669; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb; background: #f0fdf4;">✓ Instant</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; color: #9ca3af; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb;">✗ 3–7 business days</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: white;">
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #374151; border-bottom: 1px solid #f3f4f6;">Profile Ownership</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #059669; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb; background: #f0fdf4;">✓ Yours completely</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; color: #9ca3af; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb;">✗ Platform controlled</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: #fafafa;">
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #374151; border-bottom: 1px solid #f3f4f6;">Minimum Sessions</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #059669; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb; background: #f0fdf4;">✓ None</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; color: #9ca3af; text-align: center; border-bottom: 1px solid #f3f4f6; border-left: 1px solid #e5e7eb;">✗ Sometimes required</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; background: white;">
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #374151;">Hidden Fees</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; font-weight: 600; color: #059669; text-align: center; border-left: 1px solid #e5e7eb; background: #f0fdf4;">✓ Never</div>
+                    <div style="padding: 16px 20px; font-size: 0.875rem; color: #9ca3af; text-align: center; border-left: 1px solid #e5e7eb;">✗ Sometimes</div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center;">
+                <button class="btn btn-primary" style="font-size: 1rem; padding: 14px 32px; border-radius: 10px;">Start Coaching Free →</button>
+                <p style="margin-top: 12px; font-size: 0.8rem; color: #9ca3af;">No credit card. No commitment. No fees — ever.</p>
             </div>
         </div>
     </section>
