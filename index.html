@@ -345,14 +345,18 @@
             display: flex; justify-content: center; margin: 40px 0;
         }
         .toggle-bg {
-            background: var(--bg-light); border-radius: 50px; padding: 4px; display: inline-flex;
-            border: 1px solid var(--border-color);
+            background: #f1f5f9; border-radius: 999px; padding: 6px; display: inline-flex;
         }
         .toggle-btn {
-            padding: 10px 24px; border-radius: 50px; border: none; background: transparent;
-            font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all 0.2s;
+            padding: 10px 28px; border-radius: 999px; border: none; background: transparent;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
+            cursor: pointer; color: #6b7280;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
         }
-        .toggle-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+        .toggle-btn.active {
+            background: white; color: #059669;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+        }
         .nav-links a:hover { color: var(--primary); }
 
         .steps-grid {
@@ -363,17 +367,18 @@
         @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .step-card {
-            background: white; border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 32px;
-            box-shadow: var(--shadow-sm); transition: transform 0.2s;
+            background: white; border: 1px solid #e5e7eb;
+            border-radius: 14px; padding: 28px;
+            box-shadow: var(--shadow-sm); transition: box-shadow 0.2s ease;
         }
-        .step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .step-label { font-size: 0.875rem; font-weight: 700; color: var(--primary); margin-bottom: 16px; display: block; }
+        .step-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+        .step-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: #059669; text-transform: uppercase; margin-bottom: 1rem; display: block; }
         .step-icon {
-            width: 48px; height: 48px; border-radius: 12px; background: var(--primary-light);
+            width: 48px; height: 48px; border-radius: 50%; background: #d1fae5;
             display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
-            color: var(--primary); font-size: 24px; font-weight: bold;
         }
+        .step-card h3 { font-size: 18px; font-weight: 600; color: #111827; line-height: 1.3; margin-bottom: 10px; }
+        .step-card p { font-size: 15px; font-weight: 400; color: #6b7280; line-height: 1.65; margin-bottom: 0; }
 
         /* --- FEATURES (GRRO Perk Style) --- */
         .bg-gray { background-color: var(--bg-light); }
@@ -507,7 +512,7 @@
         <div class="container nav-container">
             <a href="#" class="logo">
                 <!-- Simple Play Icon -->
-                <img src="images/playalogo.png" alt="Playa Logo" width="50" style="vertical-align: middle; margin-right: 8px;">
+                <img src="images/playalogo.png" alt="Playa Logo" width="75" style="vertical-align: middle;">
                 PLAYA
             </a>
             <nav class="nav-links">
@@ -679,19 +684,25 @@
             <div id="steps-players" class="steps-grid active">
                 <div class="step-card">
                     <span class="step-label">STEP 01</span>
-                    <div class="step-icon">🔍</div>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    </div>
                     <h3>Find your ideal coach</h3>
                     <p>Filter by sport, location, position, and college division to find the perfect verified college athlete to train with.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-label">STEP 02</span>
-                    <div class="step-icon">📅</div>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
                     <h3>Book a session</h3>
                     <p>View real-time availability and book in-person training sessions directly through the app instantly.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-label">STEP 03</span>
-                    <div class="step-icon">📈</div>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    </div>
                     <h3>Level up your game</h3>
                     <p>Meet at the field, execute a personalized training plan, and get direct feedback from someone playing at the next level.</p>
                 </div>
@@ -701,20 +712,26 @@
             <div id="steps-coaches" class="steps-grid">
                 <div class="step-card">
                     <span class="step-label">STEP 01</span>
-                    <div class="step-icon">✅</div>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </div>
                     <h3>Get Verified</h3>
                     <p>Create your profile and verify your active college athlete status to build trust within the Playa community.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-label">STEP 02</span>
-                    <div class="step-icon">⚙️</div>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
                     <h3>Set your schedule</h3>
                     <p>You're the boss. Set your own hourly rates, choose the locations you train at, and open slots around your class schedule.</p>
                 </div>
                 <div class="step-card">
                     <span class="step-label">STEP 03</span>
-                    <div class="step-icon">💸</div>
-                    <h3>Train & Earn</h3>
+                    <div class="step-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3>Train &amp; Earn</h3>
                     <p>Accept bookings, conduct sessions, and get paid securely through the app while giving back to the next generation.</p>
                 </div>
             </div>
@@ -993,10 +1010,10 @@
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

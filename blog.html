@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.0625rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; }
+        .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .text-center { text-align: center; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; background: transparent; z-index: 100; border-bottom: none; transition: all 0.3s ease; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        .nav-links a { transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-main); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s ease; font-family: var(--font-main); }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- PAGE HERO --- */
+        .page-hero { padding: 140px 0 100px; background: linear-gradient(180deg, #059669 0%, #036b4a 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 52px; background-color: var(--bg-white); border-radius: 100% 100% 0 0 / 100% 100% 0 0; transform: scaleX(1.5); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 700px; margin: 0 auto; }
+        .page-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 14px; display: block; }
+        .page-hero h1 { color: white; margin-bottom: 18px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 1.125rem; margin-bottom: 0; }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+
+        /* --- FEATURED POST --- */
+        .featured-card { background: white; border: 1px solid var(--border-color); border-left: 5px solid var(--primary); border-radius: var(--radius-lg); padding: 52px; box-shadow: var(--shadow-sm); }
+        @media (max-width: 768px) { .featured-card { padding: 32px 24px; } }
+        .featured-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--primary); display: block; margin-bottom: 14px; }
+        .post-category-pill { display: inline-block; background: var(--primary-light); color: var(--primary); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 50px; margin-bottom: 16px; }
+        .featured-card h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; color: var(--text-main); letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 14px; }
+        .post-date { font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 18px; }
+        .featured-card p { font-size: 1rem; margin-bottom: 28px; max-width: 760px; }
+        .btn-read-more { display: inline-flex; align-items: center; background: var(--primary); color: white; border: none; border-radius: 8px; padding: 12px 28px; font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: var(--font-main); }
+        .btn-read-more:hover { background: var(--primary-dark); }
+
+        /* --- POSTS GRID --- */
+        .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+        @media (max-width: 1024px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .posts-grid { grid-template-columns: 1fr; } }
+        .post-card { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+        .post-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .post-card h3 { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; }
+        .post-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; flex: 1; margin-bottom: 18px; }
+        .post-link { color: var(--primary); font-weight: 600; font-size: 0.875rem; margin-top: auto; }
+        .post-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+        /* --- NEWSLETTER --- */
+        .newsletter-content { max-width: 500px; margin: 0 auto; text-align: center; }
+        .newsletter-form { display: flex; gap: 10px; margin-top: 28px; margin-bottom: 14px; }
+        @media (max-width: 480px) { .newsletter-form { flex-direction: column; } }
+        .email-input { flex: 1; padding: 13px 16px; border: 1.5px solid var(--border-color); border-radius: 8px; font-family: var(--font-main); font-size: 0.9375rem; color: var(--text-main); outline: none; transition: border-color 0.2s; }
+        .email-input:focus { border-color: var(--primary); }
+        .email-input::placeholder { color: var(--text-muted); }
+        .newsletter-form .btn-primary { padding: 13px 24px; border-radius: 8px; font-size: 0.9375rem; white-space: nowrap; }
+        .newsletter-note { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0; }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/playa_logo.png" alt="Playa Logo" width="50" style="vertical-align: middle; margin-right: 8px;">
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#for-players">For Players</a>
+                <a href="index.html#for-coaches">For Coaches</a>
+                <a href="index.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline btn-login">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-kicker">Playa Blog</span>
+                <h1>Stories from the field.</h1>
+                <p>Coaching tips, athlete stories, NIL guides, and platform updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="featured-card">
+                <span class="featured-label">Featured</span>
+                <span class="post-category-pill">Coaching</span>
+                <h2>Why college athletes are the best coaches you have never hired</h2>
+                <span class="post-date">April 10, 2026</span>
+                <p>The athletes training at the college level right now have something no professional coach can offer — they are living the game in real time. Here is why that matters for your development.</p>
+                <a href="#" class="btn-read-more">Read more →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <span class="kicker">Latest</span>
+                <h2>Recent posts</h2>
+            </div>
+            <div class="posts-grid">
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">NIL</span>
+                    <h3>What NIL means for high school athletes looking for college coaches</h3>
+                    <span class="post-date">March 28, 2026</span>
+                    <p>How the NIL era is changing the way young athletes connect with college-level training.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">Coaching</span>
+                    <h3>5 things to look for when choosing a sports coach</h3>
+                    <span class="post-date">March 21, 2026</span>
+                    <p>Not all coaching is equal. Here is what separates a great session from a wasted one.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">Athletes</span>
+                    <h3>From D1 soccer to coaching: one athlete's story on Playa</h3>
+                    <span class="post-date">March 14, 2026</span>
+                    <p>How a Division I soccer player turned game-day experience into a coaching side business.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">Platform</span>
+                    <h3>How Playa verifies every coach on the platform</h3>
+                    <span class="post-date">March 7, 2026</span>
+                    <p>A look behind the scenes at our athlete verification process and why it matters.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">NIL</span>
+                    <h3>A beginner's guide to NIL for college athletes</h3>
+                    <span class="post-date">February 28, 2026</span>
+                    <p>Everything you need to know about earning money as a college athlete under current NIL rules.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+                <div class="post-card">
+                    <span class="post-category-pill" style="margin-bottom: 12px;">Coaching</span>
+                    <h3>The difference between position-specific training and general fitness</h3>
+                    <span class="post-date">February 21, 2026</span>
+                    <p>Why sport-specific drills from a player at your position outperform generic workout programs.</p>
+                    <a href="#" class="post-link">Read more →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="newsletter-content">
+                <span class="kicker">Stay Updated</span>
+                <h2>Stay in the loop</h2>
+                <p>Get the latest Playa updates, coaching tips, and athlete stories delivered to your inbox.</p>
+                <form class="newsletter-form" onsubmit="return false;">
+                    <input type="email" class="email-input" placeholder="Your email address">
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-note">No spam. Unsubscribe any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Find a Coach</a></li>
+                        <li><a href="#">Become a Coach</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var navbar   = document.querySelector('header');
+            var logo     = navbar.querySelector('.logo');
+            var links    = navbar.querySelectorAll('.nav-links a');
+            var btnLogin = navbar.querySelector('.btn-login');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(255,255,255,0.98)';
+                    navbar.style.backdropFilter  = 'blur(10px)';
+                    navbar.style.boxShadow       = '0 1px 20px rgba(0,0,0,0.08)';
+                    navbar.style.borderBottom    = '1px solid #e5e7eb';
+                    logo.style.color             = '#059669';
+                    links.forEach(function(a) { a.style.color = '#059669'; });
+                    if (btnLogin) { btnLogin.style.color = '#111827'; btnLogin.style.borderColor = '#e5e7eb'; }
+                } else {
+                    navbar.style.backgroundColor = 'transparent';
+                    navbar.style.backdropFilter  = 'none';
+                    navbar.style.boxShadow       = 'none';
+                    navbar.style.borderBottom    = 'none';
+                    logo.style.color             = 'white';
+                    links.forEach(function(a) { a.style.color = 'rgba(255,255,255,0.9)'; });
+                    if (btnLogin) { btnLogin.style.color = 'white'; btnLogin.style.borderColor = 'rgba(255,255,255,0.5)'; }
+                }
+            }, { passive: true });
+            window.dispatchEvent(new Event('scroll'));
+        })();
+    </script>
+</body>
+</html>

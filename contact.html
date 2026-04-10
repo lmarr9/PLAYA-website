@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.0625rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; }
+        .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .text-center { text-align: center; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; background: transparent; z-index: 100; border-bottom: none; transition: all 0.3s ease; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        .nav-links a { transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-main); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s ease; font-family: var(--font-main); }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- PAGE HERO --- */
+        .page-hero { padding: 140px 0 100px; background: linear-gradient(180deg, #059669 0%, #036b4a 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 52px; background-color: var(--bg-white); border-radius: 100% 100% 0 0 / 100% 100% 0 0; transform: scaleX(1.5); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 700px; margin: 0 auto; }
+        .page-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 16px; display: block; }
+        .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; }
+        .page-hero h1 { color: white; margin-bottom: 18px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 1.125rem; margin-bottom: 0; }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+
+        /* --- SUPPORT CARDS --- */
+        .support-wrapper { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+        @media (max-width: 768px) { .support-wrapper { grid-template-columns: 1fr; } }
+        .support-card { padding: 48px; }
+        .support-card:first-child { border-right: 1px solid var(--border-color); }
+        @media (max-width: 768px) { .support-card:first-child { border-right: none; border-bottom: 1px solid var(--border-color); } }
+        .support-icon { width: 52px; height: 52px; background: var(--primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary); }
+        .support-card h3 { color: var(--text-main); font-size: 1.25rem; margin-bottom: 10px; }
+        .support-card > p { font-size: 0.9375rem; margin-bottom: 0; }
+        .check-list { margin: 22px 0; display: flex; flex-direction: column; gap: 10px; }
+        .check-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+        .check-list li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+        .btn-support { display: block; width: 100%; text-align: center; padding: 13px; border: 1.5px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: all 0.2s; background: transparent; font-family: var(--font-main); margin-top: 24px; }
+        .btn-support:hover { background: var(--primary); color: white; }
+        .support-email { margin-top: 14px; font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-bottom: 0; }
+        .support-email a { color: var(--primary); }
+
+        /* --- FAQ ACCORDION --- */
+        .faq-list { max-width: 800px; margin: 60px auto 0; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-item:first-child { border-top: 1px solid var(--border-color); }
+        .faq-question { width: 100%; text-align: left; background: none; border: none; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: var(--font-main); font-size: 1rem; font-weight: 600; color: var(--text-main); gap: 24px; }
+        .faq-question:hover { color: var(--primary); }
+        .faq-chevron { width: 20px; height: 20px; flex-shrink: 0; color: var(--text-muted); transition: transform 0.3s ease; }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-item.open .faq-question { color: var(--primary); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .faq-answer-inner { padding-bottom: 22px; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.75; }
+
+        /* --- RESOURCES --- */
+        .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+        @media (max-width: 768px) { .resources-grid { grid-template-columns: 1fr; gap: 32px; } }
+        .resource-col { text-align: center; }
+        .resource-icon { width: 52px; height: 52px; background: var(--primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary); }
+        .resource-col h3 { font-size: 1.125rem; color: var(--text-main); margin-bottom: 8px; }
+        .resource-col p { font-size: 0.9rem; margin-bottom: 16px; }
+        .resource-link { color: var(--primary); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 4px; }
+        .resource-link:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/playa_logo.png" alt="Playa Logo" width="50" style="vertical-align: middle; margin-right: 8px;">
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#for-players">For Players</a>
+                <a href="index.html#for-coaches">For Coaches</a>
+                <a href="index.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline btn-login">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-kicker">Get In Touch</span>
+                <div class="hero-badge">⏱ We respond within 24 hours</div>
+                <h1>We'd love to hear from you.</h1>
+                <p>We respond to all messages within 24 hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Cards -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="support-wrapper">
+
+                <!-- Player Support -->
+                <div class="support-card">
+                    <div class="support-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    </div>
+                    <h3>Player support</h3>
+                    <p>Questions about finding a coach, booking sessions, or payments.</p>
+                    <ul class="check-list">
+                        <li>Find the right coach for your sport</li>
+                        <li>Booking and scheduling help</li>
+                        <li>Payment and refund questions</li>
+                    </ul>
+                    <button class="btn-support">Contact Player Support →</button>
+                    <p class="support-email">Email us at <a href="mailto:support@playaapp.com">support@playaapp.com</a></p>
+                </div>
+
+                <!-- Coach Support -->
+                <div class="support-card">
+                    <div class="support-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </div>
+                    <h3>Coach support</h3>
+                    <p>Questions about getting verified, your earnings, or your profile.</p>
+                    <ul class="check-list">
+                        <li>Verification and eligibility questions</li>
+                        <li>Earnings and payout help</li>
+                        <li>Profile and availability settings</li>
+                    </ul>
+                    <button class="btn-support">Contact Coach Support →</button>
+                    <p class="support-email">Email us at <a href="mailto:coaches@playaapp.com">coaches@playaapp.com</a></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <span class="kicker">Support</span>
+                <h2>Frequently asked questions</h2>
+                <p>Here are the most common questions we get.</p>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I find a coach on Playa?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Download the Playa app, create a free account, and use the search to filter coaches by sport, location, position, and college division. You can browse all coaches for free and only pay when you book a session.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does Playa verify coaches?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">All coaches on Playa are verified as active college athletes through our enrollment verification process. We confirm their current athletic status before their profile goes live.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What does it cost to book a session?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Session prices are set by each coach and vary based on sport, location, and experience. You only pay when you book — browsing is always free.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do coaches get paid?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Coaches receive 100% of their session earnings. Playa charges zero platform fee to coaches. Payments are processed securely through the app.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I cancel or reschedule a session?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Yes. Cancellations made more than 24 hours before a session are eligible for a full refund. You can reschedule directly through the app.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What sports are available on Playa?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Playa supports 12+ sports including soccer, basketball, football, baseball, tennis, volleyball, lacrosse, and more. New sports are added regularly.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is Playa available in my city?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Playa is growing across the US. Availability depends on coaches in your area. Download the app to see coaches near you.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I become a coach on Playa?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Download the Playa app, select Become a Coach, and complete the verification process. You will need to confirm your active college athlete status. Setup takes less than 10 minutes.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="resources-grid">
+
+                <div class="resource-col">
+                    <div class="resource-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <h3>Help Center</h3>
+                    <p>Browse helpful articles and guides.</p>
+                    <a href="#" class="resource-link">Visit help center →</a>
+                </div>
+
+                <div class="resource-col">
+                    <div class="resource-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <h3>NIL Compliance</h3>
+                    <p>Learn how Playa supports NIL rules.</p>
+                    <a href="nil-compliance.html" class="resource-link">Read NIL guide →</a>
+                </div>
+
+                <div class="resource-col">
+                    <div class="resource-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Safety &amp; Trust</h3>
+                    <p>How we verify coaches and protect users.</p>
+                    <a href="#" class="resource-link">Learn more →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Find a Coach</a></li>
+                        <li><a href="#">Become a Coach</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll behavior
+        (function() {
+            var navbar   = document.querySelector('header');
+            var logo     = navbar.querySelector('.logo');
+            var links    = navbar.querySelectorAll('.nav-links a');
+            var btnLogin = navbar.querySelector('.btn-login');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(255,255,255,0.98)';
+                    navbar.style.backdropFilter  = 'blur(10px)';
+                    navbar.style.boxShadow       = '0 1px 20px rgba(0,0,0,0.08)';
+                    navbar.style.borderBottom    = '1px solid #e5e7eb';
+                    logo.style.color             = '#059669';
+                    links.forEach(function(a) { a.style.color = '#059669'; });
+                    if (btnLogin) { btnLogin.style.color = '#111827'; btnLogin.style.borderColor = '#e5e7eb'; }
+                } else {
+                    navbar.style.backgroundColor = 'transparent';
+                    navbar.style.backdropFilter  = 'none';
+                    navbar.style.boxShadow       = 'none';
+                    navbar.style.borderBottom    = 'none';
+                    logo.style.color             = 'white';
+                    links.forEach(function(a) { a.style.color = 'rgba(255,255,255,0.9)'; });
+                    if (btnLogin) { btnLogin.style.color = 'white'; btnLogin.style.borderColor = 'rgba(255,255,255,0.5)'; }
+                }
+            }, { passive: true });
+            window.dispatchEvent(new Event('scroll'));
+        })();
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var item    = this.closest('.faq-item');
+                var answer  = item.querySelector('.faq-answer');
+                var isOpen  = item.classList.contains('open');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(function(i) {
+                    i.classList.remove('open');
+                    i.querySelector('.faq-answer').style.maxHeight = '0';
+                });
+
+                // Open clicked if it was closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
