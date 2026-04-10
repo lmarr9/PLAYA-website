@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background-color: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: transparent;
+            backdrop-filter: none;
+            z-index: 100;
+            border-bottom: none;
+            transition: all 0.3s ease;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+        .nav-links a { transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: var(--font-main); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s ease; font-family: var(--font-main); }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- LEGAL HERO --- */
+        .legal-hero {
+            padding: 140px 0 90px;
+            background: linear-gradient(180deg, #059669 0%, #036b4a 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .legal-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 52px;
+            background-color: var(--bg-light);
+            border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+            transform: scaleX(1.5);
+        }
+        .legal-hero-content { position: relative; z-index: 10; }
+        .legal-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 14px; display: block; }
+        .legal-hero h1 { font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 800; color: white; margin-bottom: 14px; letter-spacing: -0.03em; line-height: 1.1; }
+        .legal-updated { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin: 0; }
+
+        /* --- MAIN LAYOUT --- */
+        .legal-main { background: var(--bg-light); padding: 60px 0 100px; }
+        .legal-layout { display: grid; grid-template-columns: 250px 1fr; gap: 40px; align-items: start; }
+        @media (max-width: 900px) { .legal-layout { grid-template-columns: 1fr; } .legal-sidebar { position: static !important; } }
+
+        /* --- SIDEBAR --- */
+        .legal-sidebar { position: sticky; top: 100px; }
+        .sidebar-nav-box { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px 14px; box-shadow: var(--shadow-sm); }
+        .sidebar-nav-title { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #9ca3af; margin-bottom: 14px; padding: 0 8px; display: block; }
+        .sidebar-link { display: block; padding: 7px 10px; font-size: 0.8rem; color: var(--text-muted); border-radius: 6px; transition: all 0.18s; border-left: 2px solid transparent; margin-bottom: 2px; line-height: 1.4; }
+        .sidebar-link:hover { color: var(--primary); background: var(--primary-light); }
+        .sidebar-link.active { color: var(--primary); background: var(--primary-light); border-left-color: var(--primary); font-weight: 600; }
+
+        /* --- CONTENT --- */
+        .legal-content { background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 52px; box-shadow: var(--shadow-sm); }
+        @media (max-width: 768px) { .legal-content { padding: 28px 20px; } }
+        .legal-section { padding-bottom: 44px; margin-bottom: 44px; border-bottom: 1px solid #f3f4f6; }
+        .legal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .section-num { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 8px; display: block; }
+        .legal-section h2 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 14px; letter-spacing: -0.01em; line-height: 1.3; }
+        .legal-section p { font-size: 0.9875rem; color: #4b5563; line-height: 1.8; margin-bottom: 0; }
+        .legal-section a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/playa_logo.png" alt="Playa Logo" width="50" style="vertical-align: middle; margin-right: 8px;">
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#for-players">For Players</a>
+                <a href="index.html#for-coaches">For Coaches</a>
+                <a href="index.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline btn-login">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Legal Hero Banner -->
+    <section class="legal-hero">
+        <div class="container">
+            <div class="legal-hero-content">
+                <span class="legal-kicker">Legal</span>
+                <h1>Terms of Service</h1>
+                <p class="legal-updated">Last Updated: April 10, 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="legal-main">
+        <div class="container">
+            <div class="legal-layout">
+
+                <!-- Sidebar -->
+                <aside class="legal-sidebar">
+                    <div class="sidebar-nav-box">
+                        <span class="sidebar-nav-title">On This Page</span>
+                        <a href="#our-services" class="sidebar-link">1. Our Services</a>
+                        <a href="#eligibility" class="sidebar-link">2. Eligibility</a>
+                        <a href="#user-accounts" class="sidebar-link">3. User Accounts</a>
+                        <a href="#coach-verification" class="sidebar-link">4. Coach Verification</a>
+                        <a href="#bookings-and-payments" class="sidebar-link">5. Bookings and Payments</a>
+                        <a href="#cancellations-and-refunds" class="sidebar-link">6. Cancellations and Refunds</a>
+                        <a href="#prohibited-activities" class="sidebar-link">7. Prohibited Activities</a>
+                        <a href="#intellectual-property" class="sidebar-link">8. Intellectual Property</a>
+                        <a href="#limitation-of-liability" class="sidebar-link">9. Limitation of Liability</a>
+                        <a href="#changes-to-terms" class="sidebar-link">10. Changes to Terms</a>
+                        <a href="#contact" class="sidebar-link">11. Contact</a>
+                    </div>
+                </aside>
+
+                <!-- Content -->
+                <div class="legal-content">
+
+                    <section id="our-services" class="legal-section">
+                        <span class="section-num">Section 01</span>
+                        <h2>Our Services</h2>
+                        <p>Playa is a sports coaching marketplace that connects players with verified college athletes for personalized in-person training sessions. By accessing or using Playa, you agree to these Terms of Service. These terms apply to all users including players, coaches, and visitors.</p>
+                    </section>
+
+                    <section id="eligibility" class="legal-section">
+                        <span class="section-num">Section 02</span>
+                        <h2>Eligibility</h2>
+                        <p>You must be at least 13 years old to use Playa. Coaches must be currently enrolled college athletes. By using the platform you confirm that all information you provide is accurate and complete.</p>
+                    </section>
+
+                    <section id="user-accounts" class="legal-section">
+                        <span class="section-num">Section 03</span>
+                        <h2>User Accounts</h2>
+                        <p>You are responsible for maintaining the confidentiality of your account credentials. You agree to notify us immediately of any unauthorized use of your account. Playa reserves the right to suspend or terminate accounts that violate these terms.</p>
+                    </section>
+
+                    <section id="coach-verification" class="legal-section">
+                        <span class="section-num">Section 04</span>
+                        <h2>Coach Verification</h2>
+                        <p>All coaches on Playa are verified college athletes. Verification includes confirmation of active enrollment and athletic status. Playa reserves the right to remove coaches who no longer meet verification requirements.</p>
+                    </section>
+
+                    <section id="bookings-and-payments" class="legal-section">
+                        <span class="section-num">Section 05</span>
+                        <h2>Bookings and Payments</h2>
+                        <p>Players book sessions directly through the Playa app. Payment is processed securely at the time of booking. Coaches receive 100% of their session earnings — Playa charges no platform fee to coaches.</p>
+                    </section>
+
+                    <section id="cancellations-and-refunds" class="legal-section">
+                        <span class="section-num">Section 06</span>
+                        <h2>Cancellations and Refunds</h2>
+                        <p>Cancellations made more than 24 hours before a session are eligible for a full refund. Cancellations within 24 hours may be subject to a partial or no refund depending on the coach's policy. No-shows are not eligible for refunds.</p>
+                    </section>
+
+                    <section id="prohibited-activities" class="legal-section">
+                        <span class="section-num">Section 07</span>
+                        <h2>Prohibited Activities</h2>
+                        <p>Users may not harass, threaten, or harm other users. Users may not misrepresent their identity or athletic status. Users may not use Playa for any unlawful purpose.</p>
+                    </section>
+
+                    <section id="intellectual-property" class="legal-section">
+                        <span class="section-num">Section 08</span>
+                        <h2>Intellectual Property</h2>
+                        <p>All content on Playa including logos, graphics, and copy is owned by Playa Technologies Inc. You may not reproduce or distribute any Playa content without written permission.</p>
+                    </section>
+
+                    <section id="limitation-of-liability" class="legal-section">
+                        <span class="section-num">Section 09</span>
+                        <h2>Limitation of Liability</h2>
+                        <p>Playa is a marketplace platform and is not responsible for the conduct of coaches or players during sessions. We are not liable for any injuries, damages, or losses arising from use of the platform.</p>
+                    </section>
+
+                    <section id="changes-to-terms" class="legal-section">
+                        <span class="section-num">Section 10</span>
+                        <h2>Changes to Terms</h2>
+                        <p>We reserve the right to update these terms at any time. Continued use of Playa after changes constitutes acceptance of the new terms. We will notify users of significant changes via email or in-app notification.</p>
+                    </section>
+
+                    <section id="contact" class="legal-section">
+                        <span class="section-num">Section 11</span>
+                        <h2>Contact</h2>
+                        <p>For questions about these Terms, contact us at <a href="mailto:legal@playaapp.com">legal@playaapp.com</a>.</p>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Find a Coach</a></li>
+                        <li><a href="#">Become a Coach</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Transparent-to-white navbar on scroll
+        (function() {
+            var navbar   = document.querySelector('header');
+            var logo     = navbar.querySelector('.logo');
+            var links    = navbar.querySelectorAll('.nav-links a');
+            var btnLogin = navbar.querySelector('.btn-login');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(255,255,255,0.98)';
+                    navbar.style.backdropFilter  = 'blur(10px)';
+                    navbar.style.boxShadow       = '0 1px 20px rgba(0,0,0,0.08)';
+                    navbar.style.borderBottom    = '1px solid #e5e7eb';
+                    logo.style.color             = '#059669';
+                    links.forEach(function(a) { a.style.color = '#059669'; });
+                    if (btnLogin) {
+                        btnLogin.style.color       = '#111827';
+                        btnLogin.style.borderColor = '#e5e7eb';
+                    }
+                } else {
+                    navbar.style.backgroundColor = 'transparent';
+                    navbar.style.backdropFilter  = 'none';
+                    navbar.style.boxShadow       = 'none';
+                    navbar.style.borderBottom    = 'none';
+                    logo.style.color             = 'white';
+                    links.forEach(function(a) { a.style.color = 'rgba(255,255,255,0.9)'; });
+                    if (btnLogin) {
+                        btnLogin.style.color       = 'white';
+                        btnLogin.style.borderColor = 'rgba(255,255,255,0.5)';
+                    }
+                }
+            }, { passive: true });
+
+            window.dispatchEvent(new Event('scroll'));
+        })();
+
+        // Sidebar IntersectionObserver — highlight active section as user scrolls
+        (function() {
+            var sections = document.querySelectorAll('.legal-section');
+            var links    = document.querySelectorAll('.sidebar-link');
+            if (!sections.length || !links.length) return;
+
+            links[0].classList.add('active');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var id = entry.target.id;
+                        links.forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-15% 0px -70% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(function(s) { observer.observe(s); });
+        })();
+    </script>
+</body>
+</html>
