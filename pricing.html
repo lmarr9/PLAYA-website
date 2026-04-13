@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.0625rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; }
+        .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .text-center { text-align: center; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; background: transparent; backdrop-filter: none; z-index: 100; border-bottom: none; transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease; }
+        header.scrolled { background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 1px 20px rgba(0,0,0,0.08); border-bottom: 1px solid #e5e7eb; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        header.scrolled .logo { color: #059669; }
+        .logo-wrap { position: relative; width: 75px; flex-shrink: 0; display: flex; align-items: center; }
+        .logo-wrap img { width: 75px; height: auto; display: block; transition: opacity 0.3s ease; }
+        .logo-wrap .logo-white { opacity: 1; }
+        .logo-wrap .logo-color { opacity: 0; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }
+        header.scrolled .logo-wrap .logo-white { opacity: 0; }
+        header.scrolled .logo-wrap .logo-color { opacity: 1; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .nav-links a { color: rgba(255,255,255,0.9); transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        header.scrolled .nav-links a { color: #059669; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font-main); transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        header.scrolled .btn-outline { color: #059669; border-color: #e5e7eb; }
+        header.scrolled .btn-outline:hover { background: var(--primary-light); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; font-family: var(--font-main); transition: background 0.2s ease; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- PAGE HERO --- */
+        .page-hero { padding: 140px 0 100px; background: linear-gradient(180deg, #059669 0%, #036b4a 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 52px; background-color: var(--bg-white); border-radius: 100% 100% 0 0 / 100% 100% 0 0; transform: scaleX(1.5); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 700px; margin: 0 auto; }
+        .page-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 14px; display: block; }
+        .page-hero h1 { color: white; margin-bottom: 18px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 1.125rem; margin-bottom: 0; }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+        .section-header { max-width: 600px; margin: 0 auto 60px; text-align: center; }
+        .section-header p { margin-bottom: 0; }
+
+        /* --- PRICING CARDS --- */
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 860px; margin: 0 auto; }
+        @media (max-width: 640px) { .pricing-grid { grid-template-columns: 1fr; } }
+        .pricing-card { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-sm); }
+        .pricing-card.featured { background: linear-gradient(135deg, #059669 0%, #036b4a 100%); border-color: transparent; box-shadow: 0 20px 40px rgba(5,150,105,0.25); }
+        .pricing-role { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--primary); margin-bottom: 12px; display: block; }
+        .pricing-card.featured .pricing-role { color: rgba(255,255,255,0.65); }
+        .pricing-card h3 { font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+        .pricing-card.featured h3 { color: white; }
+        .pricing-card > p { font-size: 0.9375rem; margin-bottom: 28px; }
+        .pricing-card.featured > p { color: rgba(255,255,255,0.75); }
+        .pricing-amount { display: flex; align-items: baseline; gap: 4px; margin-bottom: 32px; }
+        .pricing-amount .amount { font-size: 3.5rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.04em; line-height: 1; }
+        .pricing-card.featured .pricing-amount .amount { color: white; }
+        .pricing-amount .suffix { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+        .pricing-card.featured .pricing-amount .suffix { color: rgba(255,255,255,0.65); }
+        .pricing-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+        .pricing-feature { display: flex; align-items: center; gap: 12px; font-size: 0.9375rem; color: var(--text-muted); }
+        .pricing-card.featured .pricing-feature { color: rgba(255,255,255,0.85); }
+        .pricing-check { width: 20px; height: 20px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0; }
+        .pricing-card.featured .pricing-check { background: rgba(255,255,255,0.2); color: white; }
+        .btn-pricing { width: 100%; padding: 14px; border-radius: 10px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: background 0.2s, opacity 0.2s; border: none; }
+        .btn-pricing-outline { background: transparent; color: var(--primary); border: 1.5px solid var(--border-color); border-radius: 10px; width: 100%; padding: 14px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+        .btn-pricing-outline:hover { background: var(--primary-light); border-color: var(--primary); }
+        .btn-pricing-white { background: white; color: var(--primary); }
+        .btn-pricing-white:hover { opacity: 0.92; }
+
+        /* --- RATE EXAMPLES --- */
+        .rates-table { width: 100%; border-collapse: collapse; }
+        .rates-table thead tr { border-bottom: 2px solid var(--border-color); }
+        .rates-table th { text-align: left; padding: 12px 16px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+        .rates-table tbody tr { border-bottom: 1px solid var(--border-color); transition: background 0.15s; }
+        .rates-table tbody tr:last-child { border-bottom: none; }
+        .rates-table tbody tr:hover { background: var(--bg-light); }
+        .rates-table td { padding: 16px; font-size: 0.9375rem; }
+        .rates-table td:first-child { font-weight: 600; color: var(--text-main); }
+        .rates-table .rate-low { color: var(--text-muted); }
+        .rates-table .rate-high { color: var(--primary); font-weight: 700; }
+        .rate-range { display: flex; align-items: center; gap: 8px; }
+        .rate-dash { color: var(--text-muted); }
+        .rates-note { font-size: 0.875rem; color: var(--text-muted); margin-top: 20px; font-style: italic; }
+
+        /* --- FAQ --- */
+        .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
+        .faq-item:first-child { border-top: 1px solid var(--border-color); }
+        .faq-question { width: 100%; background: none; border: none; padding: 22px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; text-align: left; cursor: pointer; font-family: var(--font-main); font-size: 1rem; font-weight: 600; color: var(--text-main); }
+        .faq-chevron { flex-shrink: 0; transition: transform 0.25s ease; color: var(--text-muted); }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer-inner { padding: 0 0 20px; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* --- CTA BANNER --- */
+        .cta-banner { background: linear-gradient(135deg, #059669 0%, #036b4a 100%); border-radius: var(--radius-lg); padding: 64px 48px; text-align: center; color: white; }
+        .cta-banner h2 { color: white; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 36px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-white { background: white; color: var(--primary); border: none; border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        .btn-white:hover { opacity: 0.92; }
+        .btn-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index-full-site.html" class="logo">
+                <div class="logo-wrap">
+                    <img src="images/playalogowhite.png" alt="Playa Logo" class="logo-white">
+                    <img src="images/playalogo.png"      alt="Playa Logo" class="logo-color">
+                </div>
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index-full-site.html#features">Features</a>
+                <a href="index-full-site.html#for-players">For Players</a>
+                <a href="index-full-site.html#for-coaches">For Coaches</a>
+                <a href="index-full-site.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-kicker">Pricing</span>
+                <h1>Transparent pricing. No surprises.</h1>
+                <p>Players pay only for what they book. Coaches keep every dollar they earn. Simple, fair, and built for athletes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">How It Works</span>
+                <h2>Different sides, same deal — fair for everyone</h2>
+                <p>Playa charges players a small booking fee to keep the platform running. Coaches pay absolutely nothing.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Players -->
+                <div class="pricing-card">
+                    <span class="pricing-role">For Players</span>
+                    <h3>Pay per session</h3>
+                    <p>No subscriptions, no monthly fees. You pay only when you book a session.</p>
+                    <div class="pricing-amount">
+                        <span class="amount">$0</span>
+                        <span class="suffix">to sign up</span>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Free to browse coaches
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Pay the coach's listed rate per session
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Small platform service fee at checkout
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Secure in-app payments
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Cancel up to 24 hours before for a full refund
+                        </div>
+                    </div>
+                    <button class="btn-pricing-outline">Find a Coach</button>
+                </div>
+                <!-- Coaches -->
+                <div class="pricing-card featured">
+                    <span class="pricing-role">For Coaches</span>
+                    <h3>Keep everything you earn</h3>
+                    <p>We never take a cut from coaches. Your rate is your rate, full stop.</p>
+                    <div class="pricing-amount">
+                        <span class="amount">0%</span>
+                        <span class="suffix">platform fee</span>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Free to create a coach profile
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            You set your own hourly rate — no approval needed
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            100% of your rate deposited to your account
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Payouts within 48 hours of each session
+                        </div>
+                        <div class="pricing-feature">
+                            <div class="pricing-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Full NIL compliance support included
+                        </div>
+                    </div>
+                    <button class="btn-pricing btn-pricing-white">Become a Coach</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typical Rates -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">Sample Rates</span>
+                <h2>What do sessions typically cost?</h2>
+                <p>Coaches set their own rates. Below are typical ranges across sports on Playa — all set by the athletes themselves.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+                <table class="rates-table">
+                    <thead>
+                        <tr>
+                            <th>Sport</th>
+                            <th>Typical Rate Range (per hour)</th>
+                            <th>Session Length</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Basketball</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$30</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$75</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">60 – 90 min</td>
+                        </tr>
+                        <tr>
+                            <td>Soccer</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$25</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$65</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">60 – 90 min</td>
+                        </tr>
+                        <tr>
+                            <td>Baseball / Softball</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$30</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$70</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">45 – 60 min</td>
+                        </tr>
+                        <tr>
+                            <td>Tennis</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$40</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$80</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">60 min</td>
+                        </tr>
+                        <tr>
+                            <td>Volleyball</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$25</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$60</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">60 – 90 min</td>
+                        </tr>
+                        <tr>
+                            <td>Lacrosse</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$35</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$75</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">60 – 90 min</td>
+                        </tr>
+                        <tr>
+                            <td>Swimming</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$30</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$65</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">45 – 60 min</td>
+                        </tr>
+                        <tr>
+                            <td>Track &amp; Field</td>
+                            <td>
+                                <div class="rate-range">
+                                    <span class="rate-low">$20</span>
+                                    <span class="rate-dash">–</span>
+                                    <span class="rate-high">$55</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--text-muted);">45 – 60 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="rates-note">* Rates shown are illustrative examples. Actual rates are set by individual coaches and may vary. All rates shown are per hour before the player-side service fee.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">FAQ</span>
+                <h2>Pricing questions answered</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Is there a subscription fee to use Playa?
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">No. Playa is completely free to download and browse. Players pay only when they book a session. Coaches pay nothing at all — ever.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What is the player-side service fee?
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Players pay a small service fee at checkout on top of the coach's listed rate. This fee covers platform operations, payment processing, and safety features. The exact amount is shown transparently before you confirm any booking.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        How and when do coaches get paid?
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Coaches are paid via direct deposit within 48 hours of each completed session. Payments are processed through Stripe. Coaches link their bank account during onboarding and receive 100% of their listed rate — no deductions.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What is Playa's refund policy?
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Players can cancel a session and receive a full refund if they cancel at least 24 hours before the scheduled start time. Cancellations within 24 hours may be subject to a cancellation fee. If a coach cancels, you always receive a full refund.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Can coaches change their rate?
+                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Yes. Coaches can update their rates at any time from their profile settings. Rate changes only apply to new bookings — any sessions already booked will be honored at the original agreed rate.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="cta-banner">
+                <span class="page-kicker" style="color: rgba(255,255,255,0.65);">Get Started</span>
+                <h2>No hidden costs. Just coaching.</h2>
+                <p>Download Playa for free and start connecting with verified college athletes today.</p>
+                <div class="cta-buttons">
+                    <button class="btn-white">Download on the App Store</button>
+                    <button class="btn-ghost">Get it on Google Play</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="find-a-coach.html">Find a Coach</a></li>
+                        <li><a href="become-a-coach.html">Become a Coach</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="safety.html">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var navbar = document.querySelector('header');
+            function update() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+
+        function toggleFAQ(btn) {
+            var item = btn.parentElement;
+            var answer = item.querySelector('.faq-answer');
+            var isOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item.open').forEach(function(el) {
+                el.classList.remove('open');
+                el.querySelector('.faq-answer').style.maxHeight = '0';
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        }
+    </script>
+</body>
+</html>

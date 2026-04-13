@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Coach | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.0625rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; }
+        .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .text-center { text-align: center; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; background: transparent; backdrop-filter: none; z-index: 100; border-bottom: none; transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease; }
+        header.scrolled { background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 1px 20px rgba(0,0,0,0.08); border-bottom: 1px solid #e5e7eb; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        header.scrolled .logo { color: #059669; }
+        .logo-wrap { position: relative; width: 75px; flex-shrink: 0; display: flex; align-items: center; }
+        .logo-wrap img { width: 75px; height: auto; display: block; transition: opacity 0.3s ease; }
+        .logo-wrap .logo-white { opacity: 1; }
+        .logo-wrap .logo-color { opacity: 0; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }
+        header.scrolled .logo-wrap .logo-white { opacity: 0; }
+        header.scrolled .logo-wrap .logo-color { opacity: 1; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .nav-links a { color: rgba(255,255,255,0.9); transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        header.scrolled .nav-links a { color: #059669; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font-main); transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        header.scrolled .btn-outline { color: #059669; border-color: #e5e7eb; }
+        header.scrolled .btn-outline:hover { background: var(--primary-light); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; font-family: var(--font-main); transition: background 0.2s ease; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- PAGE HERO --- */
+        .page-hero { padding: 140px 0 100px; background: linear-gradient(180deg, #059669 0%, #036b4a 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 52px; background-color: var(--bg-white); border-radius: 100% 100% 0 0 / 100% 100% 0 0; transform: scaleX(1.5); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 700px; margin: 0 auto; }
+        .page-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 14px; display: block; }
+        .page-hero h1 { color: white; margin-bottom: 18px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 1.125rem; margin-bottom: 0; }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+        .section-header { max-width: 600px; margin: 0 auto 60px; text-align: center; }
+        .section-header p { margin-bottom: 0; }
+
+        /* --- STEPS GRID --- */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+        .step-card { background: white; border: 1px solid var(--border-color); border-radius: 14px; padding: 28px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+        .step-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .step-icon-wrap { width: 52px; height: 52px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--primary); }
+        .step-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); display: block; margin-bottom: 8px; }
+        .step-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-main); margin-bottom: 10px; }
+        .step-card p { font-size: 0.9375rem; line-height: 1.65; margin-bottom: 0; }
+
+        /* --- PERKS GRID --- */
+        .perks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 900px) { .perks-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .perks-grid { grid-template-columns: 1fr; } }
+        .perk-card { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+        .perk-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .perk-icon { width: 48px; height: 48px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--primary); }
+        .perk-card h3 { color: var(--text-main); margin-bottom: 10px; }
+        .perk-card p { font-size: 0.9375rem; margin-bottom: 0; }
+
+        /* --- ELIGIBILITY SPLIT --- */
+        .eligibility-split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+        @media (max-width: 900px) { .eligibility-split { grid-template-columns: 1fr; gap: 40px; } }
+        .eligibility-list { display: flex; flex-direction: column; gap: 16px; }
+        .eligibility-item { display: flex; align-items: flex-start; gap: 14px; }
+        .eligibility-check { width: 24px; height: 24px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+        .eligibility-item h4 { font-size: 1rem; font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
+        .eligibility-item p { font-size: 0.9rem; margin-bottom: 0; }
+        .eligibility-note { background: var(--primary-light); border-radius: var(--radius-md); padding: 24px; border-left: 4px solid var(--primary); margin-top: 8px; }
+        .eligibility-note p { font-size: 0.9rem; color: var(--primary-dark); font-weight: 500; margin-bottom: 0; }
+
+        /* --- EARNINGS CARD --- */
+        .earnings-card { background: linear-gradient(135deg, #059669 0%, #036b4a 100%); border-radius: var(--radius-lg); padding: 40px; color: white; }
+        .earnings-card h3 { color: white; font-size: 1.375rem; margin-bottom: 8px; }
+        .earnings-card p { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
+        .earnings-stat { margin-top: 24px; }
+        .earnings-number { font-size: 3rem; font-weight: 800; color: white; letter-spacing: -0.04em; line-height: 1; }
+        .earnings-label { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 500; }
+        .earnings-divider { width: 40px; height: 2px; background: rgba(255,255,255,0.3); margin: 20px 0; }
+
+        /* --- CTA BANNER --- */
+        .cta-banner { background: linear-gradient(135deg, #059669 0%, #036b4a 100%); border-radius: var(--radius-lg); padding: 64px 48px; text-align: center; color: white; }
+        .cta-banner h2 { color: white; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 36px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-white { background: white; color: var(--primary); border: none; border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        .btn-white:hover { opacity: 0.92; }
+        .btn-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index-full-site.html" class="logo">
+                <div class="logo-wrap">
+                    <img src="images/playalogowhite.png" alt="Playa Logo" class="logo-white">
+                    <img src="images/playalogo.png"      alt="Playa Logo" class="logo-color">
+                </div>
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index-full-site.html#features">Features</a>
+                <a href="index-full-site.html#for-players">For Players</a>
+                <a href="index-full-site.html#for-coaches">For Coaches</a>
+                <a href="index-full-site.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-kicker">Become a Coach</span>
+                <h1>Turn your athletic career into income.</h1>
+                <p>You've put in the work to compete at the college level. Now share that edge with the next generation — on your schedule, at your price.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">How It Works</span>
+                <h2>Start coaching in three steps</h2>
+                <p>Setting up your Playa profile takes less than 10 minutes. After that, sessions start coming to you.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 01</span>
+                    <h3>Create Your Profile</h3>
+                    <p>Sign up with your .edu email, verify your athlete status, and build your profile. Add your sport, school, year, and coaching specialty.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 02</span>
+                    <h3>Set Your Rates</h3>
+                    <p>You're in full control. Set your hourly rate, choose session lengths, and block off your availability. Adjust anytime.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 03</span>
+                    <h3>Start Coaching</h3>
+                    <p>Accept session requests from players in your area, show up, coach, and get paid — directly to your bank account within 48 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perks -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">Why Coach on Playa</span>
+                <h2>Built for athletes, by athletes</h2>
+                <p>Playa is the only coaching marketplace built with college athletes at the center — because you deserve the full value of what you bring.</p>
+            </div>
+            <div class="perks-grid">
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>0% Platform Fee</h3>
+                    <p>We charge players a small booking fee. You keep every dollar you earn. No cuts, no hidden deductions — ever.</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Full Flexibility</h3>
+                    <p>Coach when you want, where you want. Accept or decline any session request. Your season always comes first.</p>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Make an Impact</h3>
+                    <p>Mentoring younger athletes builds leadership skills, strengthens your community, and looks exceptional on your résumé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eligibility -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="eligibility-split">
+                <div>
+                    <span class="kicker">Eligibility</span>
+                    <h2>Who can coach on Playa?</h2>
+                    <p>Playa is open to any currently enrolled college athlete in good standing with their program. Here's what we verify:</p>
+                    <div class="eligibility-list" style="margin-top: 32px;">
+                        <div class="eligibility-item">
+                            <div class="eligibility-check">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div>
+                                <h4>Active enrollment</h4>
+                                <p>You must be currently enrolled at a 2- or 4-year college or university.</p>
+                            </div>
+                        </div>
+                        <div class="eligibility-item">
+                            <div class="eligibility-check">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div>
+                                <h4>Active athlete status</h4>
+                                <p>You must be on an active roster at an NCAA, NAIA, or JUCO program.</p>
+                            </div>
+                        </div>
+                        <div class="eligibility-item">
+                            <div class="eligibility-check">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div>
+                                <h4>NIL compliance</h4>
+                                <p>Your coaching activity must comply with your school's NIL policy and applicable NCAA/NAIA rules.</p>
+                            </div>
+                        </div>
+                        <div class="eligibility-item">
+                            <div class="eligibility-check">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div>
+                                <h4>Identity verification</h4>
+                                <p>We verify your identity and student-athlete status before your profile goes live.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eligibility-note" style="margin-top: 32px;">
+                        <p>Not sure if you qualify? Email us at <a href="mailto:athletes@playaapp.com" style="color: var(--primary-dark); font-weight: 600;">athletes@playaapp.com</a> and we'll walk you through it.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="earnings-card">
+                        <span class="page-kicker" style="color: rgba(255,255,255,0.65); margin-bottom: 8px;">Your Earnings</span>
+                        <h3>Keep 100% of what you charge.</h3>
+                        <p>Coaches on Playa set their own rates. Players pay a small booking fee on top — you never see a deduction.</p>
+                        <div class="earnings-stat">
+                            <div class="earnings-number">$0</div>
+                            <div class="earnings-label">Platform fee taken from coaches</div>
+                        </div>
+                        <div class="earnings-divider"></div>
+                        <div class="earnings-stat">
+                            <div class="earnings-number">48h</div>
+                            <div class="earnings-label">Max payout time after each session</div>
+                        </div>
+                        <div class="earnings-divider"></div>
+                        <div class="earnings-stat">
+                            <div class="earnings-number">You</div>
+                            <div class="earnings-label">Set your own hourly rate — no approval needed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="cta-banner">
+                <span class="page-kicker" style="color: rgba(255,255,255,0.65);">Ready to Coach?</span>
+                <h2>Start earning this season.</h2>
+                <p>Download Playa and create your coach profile in under 10 minutes. Your first booking could come today.</p>
+                <div class="cta-buttons">
+                    <button class="btn-white">Download on the App Store</button>
+                    <button class="btn-ghost">Get it on Google Play</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="find-a-coach.html">Find a Coach</a></li>
+                        <li><a href="become-a-coach.html">Become a Coach</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="safety.html">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var navbar = document.querySelector('header');
+            function update() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+    </script>
+</body>
+</html>

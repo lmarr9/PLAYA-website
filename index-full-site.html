@@ -8,6 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Playa';
+            src: url('fonts/Playa.ttf') format('truetype');
+        }
+
         /* --- CSS VARIABLES & RESET --- */
         :root {
             --primary: #059669; /* Emerald Green */
@@ -1047,6 +1052,33 @@
         </div>
     </section>
 
+    <!-- ============================================
+         TEMPORARY: SOCIAL MEDIA PROFILE IMAGE
+         DELETE THIS ENTIRE SECTION WHEN DONE
+         ============================================ -->
+    <section style="margin: 60px auto; text-align: center;">
+        <p style="font-size: 12px; color: #9ca3af; margin-bottom: 16px;">TEMPORARY — Social Media Profile Image (320x320)</p>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 320 320"
+             width="320" height="320"
+             id="playa-profile-svg"
+             style="display: block; margin: 0 auto;">
+            <rect width="320" height="320" fill="#059669"/>
+            <text x="160" y="195"
+                  font-family="Playa, Impact, sans-serif"
+                  font-size="96" font-weight="900"
+                  fill="white" text-anchor="middle"
+                  letter-spacing="6">PLAYA</text>
+        </svg>
+        <div style="text-align: center;">
+            <button onclick="downloadSVG()" style="margin-top: 16px; padding: 10px 24px; background-color: #059669; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; letter-spacing: 0.03em;">Download Image →</button>
+        </div>
+    </section>
+    <!-- ============================================
+         TEMPORARY: SOCIAL MEDIA PROFILE IMAGE
+         DELETE THIS ENTIRE SECTION WHEN DONE
+         ============================================ -->
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1058,10 +1090,10 @@
                 <div class="footer-col">
                     <h4>Platform</h4>
                     <ul>
-                        <li><a href="#">Find a Coach</a></li>
-                        <li><a href="#">Become a Coach</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Safety & Trust</a></li>
+                        <li><a href="find-a-coach.html">Find a Coach</a></li>
+                        <li><a href="become-a-coach.html">Become a Coach</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="safety.html">Safety &amp; Trust</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1119,6 +1151,20 @@
             update();
         })();
 
+    </script>
+
+    <script>
+        function downloadSVG() {
+            const svg = document.getElementById('playa-profile-svg');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(svgBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'playa-profile.svg';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
     </script>
 </body>
 </html>

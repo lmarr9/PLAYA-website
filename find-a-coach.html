@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Coach | Playa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #d1fae5;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Inter', sans-serif;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-white); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h1 { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { font-size: 1.0625rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7; }
+        .kicker { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .text-center { text-align: center; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; background: transparent; backdrop-filter: none; z-index: 100; border-bottom: none; transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease; }
+        header.scrolled { background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 1px 20px rgba(0,0,0,0.08); border-bottom: 1px solid #e5e7eb; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.05em; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        header.scrolled .logo { color: #059669; }
+        .logo-wrap { position: relative; width: 75px; flex-shrink: 0; display: flex; align-items: center; }
+        .logo-wrap img { width: 75px; height: auto; display: block; transition: opacity 0.3s ease; }
+        .logo-wrap .logo-white { opacity: 1; }
+        .logo-wrap .logo-color { opacity: 0; position: absolute; top: 50%; left: 0; transform: translateY(-50%); }
+        header.scrolled .logo-wrap .logo-white { opacity: 0; }
+        header.scrolled .logo-wrap .logo-color { opacity: 1; }
+        .nav-links { display: none; gap: 32px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+        .nav-links a { color: rgba(255,255,255,0.9); transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary); }
+        header.scrolled .nav-links a { color: #059669; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--font-main); transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        header.scrolled .btn-outline { color: #059669; border-color: #e5e7eb; }
+        header.scrolled .btn-outline:hover { background: var(--primary-light); }
+        .btn-primary { background-color: var(--primary); color: white; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; font-family: var(--font-main); transition: background 0.2s ease; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        /* --- PAGE HERO --- */
+        .page-hero { padding: 140px 0 100px; background: linear-gradient(180deg, #059669 0%, #036b4a 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 52px; background-color: var(--bg-white); border-radius: 100% 100% 0 0 / 100% 100% 0 0; transform: scaleX(1.5); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 700px; margin: 0 auto; }
+        .page-kicker { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.65); margin-bottom: 14px; display: block; }
+        .page-hero h1 { color: white; margin-bottom: 18px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 1.125rem; margin-bottom: 0; }
+
+        /* --- SECTIONS --- */
+        .section-padding { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+        .section-header { max-width: 600px; margin: 0 auto 60px; text-align: center; }
+        .section-header p { margin-bottom: 0; }
+
+        /* --- STEPS GRID --- */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+        .step-card { background: white; border: 1px solid var(--border-color); border-radius: 14px; padding: 28px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+        .step-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .step-icon-wrap { width: 52px; height: 52px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--primary); }
+        .step-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--primary); display: block; margin-bottom: 8px; }
+        .step-card h3 { font-size: 1.125rem; font-weight: 600; color: var(--text-main); margin-bottom: 10px; }
+        .step-card p { font-size: 0.9375rem; line-height: 1.65; margin-bottom: 0; }
+
+        /* --- SPORTS GRID --- */
+        .sports-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
+        .sport-pill { background: white; border: 1.5px solid var(--border-color); border-radius: 50px; padding: 10px 22px; font-size: 0.875rem; font-weight: 600; color: var(--text-main); cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s; display: flex; align-items: center; gap: 8px; }
+        .sport-pill:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+        .sport-pill svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+        /* --- VALUE CARDS --- */
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 900px) { .value-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .value-grid { grid-template-columns: 1fr; } }
+        .value-card { background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 32px; box-shadow: var(--shadow-sm); transition: transform 0.2s; }
+        .value-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .value-icon { width: 48px; height: 48px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--primary); }
+        .value-card h3 { color: var(--text-main); margin-bottom: 10px; }
+        .value-card p { font-size: 0.9375rem; margin-bottom: 0; }
+
+        /* --- CTA BANNER --- */
+        .cta-banner { background: linear-gradient(135deg, #059669 0%, #036b4a 100%); border-radius: var(--radius-lg); padding: 64px 48px; text-align: center; color: white; }
+        .cta-banner h2 { color: white; margin-bottom: 16px; }
+        .cta-banner p { color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 36px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-white { background: white; color: var(--primary); border: none; border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        .btn-white:hover { opacity: 0.92; }
+        .btn-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 10px; padding: 14px 30px; font-family: var(--font-main); font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #064e3b; color: #d1fae5; padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+        .footer-brand-name { color: white; font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: -0.05em; display: block; }
+        .footer-brand p { color: #a7f3d0; max-width: 300px; font-size: 0.9rem; line-height: 1.6; }
+        .footer-col h4 { color: white; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; font-size: 13px; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index-full-site.html" class="logo">
+                <div class="logo-wrap">
+                    <img src="images/playalogowhite.png" alt="Playa Logo" class="logo-white">
+                    <img src="images/playalogo.png"      alt="Playa Logo" class="logo-color">
+                </div>
+                PLAYA
+            </a>
+            <nav class="nav-links">
+                <a href="index-full-site.html#features">Features</a>
+                <a href="index-full-site.html#for-players">For Players</a>
+                <a href="index-full-site.html#for-coaches">For Coaches</a>
+                <a href="index-full-site.html#coach-fee">0% Coach Fee</a>
+            </nav>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-outline">Log in</button>
+                <button class="btn-primary">Download Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <span class="page-kicker">Find a Coach</span>
+                <h1>Train with a college athlete.</h1>
+                <p>Browse verified college athletes across 12+ sports. Filter by location, sport, and availability — then book your first session in minutes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">How It Works</span>
+                <h2>Book a session in three easy steps</h2>
+                <p>From search to court in minutes. Playa makes finding the right coach fast and effortless.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 01</span>
+                    <h3>Search &amp; Filter</h3>
+                    <p>Browse coaches by sport, location, experience level, and price. Use filters to narrow down exactly what you're looking for.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 02</span>
+                    <h3>View Profiles</h3>
+                    <p>Read athlete bios, check verified credentials, view ratings, and browse available time slots — all before you commit.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <span class="step-label">Step 03</span>
+                    <h3>Book &amp; Pay</h3>
+                    <p>Pick your time, confirm the session, and pay securely in-app. Your coach is notified instantly — show up and train.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse by Sport -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">All Sports</span>
+                <h2>Find coaches across every sport</h2>
+                <p>Playa coaches compete at D1, D2, D3, NAIA, and JUCO programs across the country.</p>
+            </div>
+            <div class="sports-grid">
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Basketball
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Soccer
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Baseball
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Softball
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Tennis
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Volleyball
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Lacrosse
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Swimming
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Track &amp; Field
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Football
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Golf
+                </div>
+                <div class="sport-pill">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    Wrestling
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Playa -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="kicker">Why Playa</span>
+                <h2>The best way to find your next coach</h2>
+                <p>Every coach on Playa is a verified college athlete. No fake profiles, no unqualified trainers.</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h3>Verified Athletes Only</h3>
+                    <p>Every coach is an active college athlete with verified enrollment. No hobbyists — just real, currently competing athletes.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <h3>Flexible Scheduling</h3>
+                    <p>Book sessions around your schedule. Morning, evenings, weekends — coaches on Playa work around you, not the other way around.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Affordable Rates</h3>
+                    <p>College athletes set their own competitive rates, making elite-level coaching accessible to players at every budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="cta-banner">
+                <span class="page-kicker" style="color: rgba(255,255,255,0.65);">Get Started Today</span>
+                <h2>Your next coach is waiting.</h2>
+                <p>Download Playa for free and browse hundreds of verified college athletes ready to train you.</p>
+                <div class="cta-buttons">
+                    <button class="btn-white">Download on the App Store</button>
+                    <button class="btn-ghost">Get it on Google Play</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Playa</span>
+                    <p>Connecting the next generation of athletes with college talent.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="find-a-coach.html">Find a Coach</a></li>
+                        <li><a href="become-a-coach.html">Become a Coach</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="safety.html">Safety &amp; Trust</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="nil-compliance.html">NIL Compliance</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div style="font-size:12px; color:#a7f3d0;">© 2026 Playa App. All rights reserved.</div>
+                <div style="display:flex; gap:16px; font-weight:bold; letter-spacing:2px;">
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">TT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var navbar = document.querySelector('header');
+            function update() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
+    </script>
+</body>
+</html>
